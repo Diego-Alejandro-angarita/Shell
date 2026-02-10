@@ -49,4 +49,11 @@ void cmd_salir(char **args);
  */
 int num_comandos();
 
+
+// --- Comandos Avanzados ---
+void cmd_crear(char **args);
+void cmd_eliminar(char **args);
+void cmd_renombrar(char **args);
+void cmd_copiar(char **args);
+
 #endif

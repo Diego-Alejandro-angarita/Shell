@@ -25,6 +25,10 @@ void cmd_ayuda(char **args) {
     printf("  - calc <n1> <op> <n2>: Realiza cálculos simples.\n");
     printf("  - ayuda: Muestra este mensaje.\n");
     printf("  - salir: Termina la sesión.\n");
+    printf("  - crear <archivo>: Crea un archivo vacío.\n");
+    printf("  - eliminar <archivo>: Borra un archivo con confirmación.\n");
+    printf("  - renombrar <viejo> <nuevo>: Cambia el nombre.\n");
+    printf("  - copiar <origen> <destino>: Copia el contenido.\n");
     
     // Silenciar advertencia de compilador sobre variable no usada
     (void)args;

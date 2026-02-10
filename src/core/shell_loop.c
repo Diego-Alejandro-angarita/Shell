@@ -27,7 +27,11 @@ char *nombres_comandos[] = {
     "tiempo",
     "calc",
     "ayuda",
-    "salir"
+    "salir", 
+    "crear",
+    "eliminar",
+    "renombrar",
+    "copiar"
 };
 
 /*
@@ -41,7 +45,11 @@ void (*func_comandos[]) (char **) = {
     &cmd_tiempo,
     &cmd_calc,
     &cmd_ayuda,
-    &cmd_salir
+    &cmd_salir,
+    &cmd_crear,
+    &cmd_eliminar,
+    &cmd_renombrar,
+    &cmd_copiar
 };
 
 /**
@@ -110,3 +118,5 @@ void loop_shell() {
         
     } while (status); // Por ahora el loop es infinito hasta que cmd_salir hace exit(0)
 }
+
+
