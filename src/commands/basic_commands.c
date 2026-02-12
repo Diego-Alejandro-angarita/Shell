@@ -60,6 +60,8 @@ void cmd_ayuda(char **args) {
     (void)args;
 }
 
+
+
 /**
  * @brief Comando SALIR
  * * Finaliza la ejecución del programa de forma controlada.

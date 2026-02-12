@@ -19,6 +19,7 @@ extern int idioma_actual;
  * * Realiza operaciones aritméticas básicas entre dos números.
  * Sintaxis esperada: calc <num1> <operador> <num2>
  */
+
 void cmd_calc(char **args) {
     // 1. Validación de argumentos. Necesitamos exactamente 3 partes después del comando.
     if (args[1] == NULL || args[2] == NULL || args[3] == NULL) {

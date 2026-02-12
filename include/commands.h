@@ -91,4 +91,13 @@ void cmd_renombrar(char **args);
  */
 void cmd_copiar(char **args);
 
+
+/**
+ * @brief Limpia la pantalla de la terminal y muestra el banner de bienvenida.
+ * Esto mejora la experiencia del usuario al proporcionar un entorno despejado.
+ * @param args Argumentos del comando (no se usan aquí, por eso (void)args).
+ */
+void cmd_limpiar(char **args);
+
+
 #endif
