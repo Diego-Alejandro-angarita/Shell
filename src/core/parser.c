@@ -6,10 +6,12 @@
  * en una estructura de datos (lista de argumentos) que el sistema pueda procesar.
  */
 
+
 #include <stdio.h>  // Para getline, perror, fprintf, stdin
 #include <stdlib.h> // Para malloc, realloc, free, exit
 #include <string.h> // Para strtok
 #include "shell.h"  // Definiciones globales como DELIM
+#include "utils.h"  // Para funciones de manejo de errores personalizadas
 
 /**
  * @brief Lee una línea completa de texto desde la entrada estándar (teclado).
@@ -62,8 +64,8 @@ char **parsear_linea(char *linea) {
     char *token;
 
     if (!tokens) {
-        fprintf(stderr, "Error de asignación de memoria (malloc falló)\n");
-        exit(EXIT_FAILURE);
+    error_eafitos("Fallo crítico: No se pudo asignar memoria para tokens.");
+    exit(EXIT_FAILURE);
     }
 
     // strtok: Divide el string 'linea' usando los delimitadores (espacio, tab, etc.)

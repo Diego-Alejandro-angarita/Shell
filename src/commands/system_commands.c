@@ -6,9 +6,11 @@
  * gestión de procesos o informes de memoria.
  */
 
+
 #include <stdio.h>
 #include <stdlib.h> // Para atof (ASCII to Float conversion)
 #include "commands.h"
+#include "utils.h" 
 
 /**
  * @brief Comando CALC (Calculadora)
@@ -24,7 +26,9 @@
 void cmd_calc(char **args) {
     // 1. Validación de argumentos. Necesitamos exáctamente 3 partes después del comando.
     if (args[1] == NULL || args[2] == NULL || args[3] == NULL) {
-        printf("Uso: calc <num1> <operador> <num2>\nEjemplo: calc 5 + 3\n");
+       error_eafitos("Faltan parámetros para la operación.");  // Llamada a función de error personalizada
+       printf("  Uso: " YEL "calc <num1> <operador> <num2>" RESET "\n"); // Mensaje de ayuda específico para este comando
+       printf("  Ejemplo: calc 5 + 3\n");
         return;
     }
 
@@ -50,17 +54,27 @@ void cmd_calc(char **args) {
         case '/': 
             // Manejo de caso borde: División por cero
             if (n2 == 0) {
-                printf("Error: División por cero no permitida.\n");
+                error_eafitos("Operación inválida: División por cero.");
                 return;
             }
             res = n1 / n2; 
             break;
-        default:
-            printf("Error: Operador '%c' no reconocido. Use +, -, * o /.\n", op);
+        default: 
+
+        /**
+         * @brief  Manejo de operador desconocido
+         *  Si el usuario ingresa un operador que no reconocemos, mostramos un error específico.
+         *   sprintf() se utiliza para construir un mensaje de error dinámico que incluye el operador no reconocido.
+         *   Esto mejora la experiencia del usuario al proporcionar información clara sobre lo que salió mal.
+         *  msg es un buffer de 50 caracteres, lo suficientemente grande para contener el mensaje de error.
+         */
+            char msg[50]; 
+            sprintf(msg, "Operador '%c' no reconocido.", op); 
+            error_eafitos(msg);
             return;
     }
 
     // 4. Salida
     // %.2f formatea el float para mostrar solo 2 decimales.
-    printf("Resultado: %.2f\n", res);
+    printf(GRN "➜  Resultado: " RESET "%.2f\n", res);
 }
