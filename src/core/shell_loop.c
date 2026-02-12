@@ -6,11 +6,18 @@
  * despachar (dispatch) la ejecución de comandos utilizando una tabla de búsqueda.
  */
 
+/**
+ * @file utils.h
+ * @brief Utilidades generales para la shell EAFITos. 
+ * Contiene funciones de manejo de errores, limpieza de pantalla y presentación.
+* Estas funciones son auxiliares para mejorar la experiencia del usuario y la interfaz de la shell.
+ */     
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "shell.h"
 #include "commands.h"
+#include "utils.h"
 
 /*
  * --- Registro de Comandos ---
@@ -27,11 +34,11 @@ char *nombres_comandos[] = {
     "tiempo",
     "calc",
     "ayuda",
-    "salir", 
     "crear",
     "eliminar",
     "renombrar",
-    "copiar"
+    "copiar",
+    "salir"
 };
 
 /*
@@ -45,11 +52,11 @@ void (*func_comandos[]) (char **) = {
     &cmd_tiempo,
     &cmd_calc,
     &cmd_ayuda,
-    &cmd_salir,
     &cmd_crear,
     &cmd_eliminar,
     &cmd_renombrar,
-    &cmd_copiar
+    &cmd_copiar,
+    &cmd_salir
 };
 
 /**
@@ -82,9 +89,21 @@ void ejecutar(char **args) {
         }
     }
 
-    // Si salimos del ciclo, el comando no existe.
-    printf("Comando desconocido: %s\nEscribe 'ayuda' para ver los comandos.\n", args[0]);
+
+    /**
+     * @brief  
+     * Si llegamos aquí, el comando no fue reconocido. Construimos un mensaje de error personalizado.
+     *  Usamos snprintf para evitar desbordamientos de buffer, limitando el tamaño del mensaje a 128 caracteres.
+     *  Luego, llamamos a error_eafitos() para imprimir el mensaje en rojo
+     */
+    char msg_error[128]; 
+    snprintf(msg_error, sizeof(msg_error), "Comando '%s' no reconocido.", args[0]);
+    
+    // USAMOS LA FUNCIÓN DE UTILS.H
+    error_eafitos(msg_error);  
+    printf("Escribe " GRN "'ayuda'" RESET " para ver los comandos disponibles.\n");
 }
+
 
 /**
  * @brief Bucle principal Read-Eval-Print Loop (REPL).
@@ -101,7 +120,8 @@ void loop_shell() {
     int status = 1; // Variable de control del bucle
 
     do {
-        printf("EAFITos> ");
+        // Mostrar el prompt con colores
+        printf(CYN "[" GRN "EAFITos" CYN "] " YEL "➜  " RESET);
         
         // 1. Lectura
         linea = leer_linea();

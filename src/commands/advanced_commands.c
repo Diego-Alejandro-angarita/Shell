@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "commands.h"
+#include "utils.h"  // Para funciones de utilidad como error_eafitos
 
 // crear <archivo>
 void cmd_crear(char **args) {
