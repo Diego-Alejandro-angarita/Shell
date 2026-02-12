@@ -46,6 +46,10 @@ void cmd_ayuda(char **args);
  */
 void cmd_salir(char **args);
 
+/**  
+ * @brief Comando para limpiar la terminal.
+ */
+void cmd_limpiar(char **args);
 // --- Utilidades del Registro de Comandos ---
 
 /**

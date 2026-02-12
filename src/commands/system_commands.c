@@ -111,3 +111,9 @@ void cmd_idioma(char **args) {
         else error_eafitos("Invalid option. Use 1 or 2.");
     }
 }
+
+void cmd_limpiar(char **args) {
+    limpiar_pantalla();
+    cmd_ayuda(args); // Mostrar ayuda después de limpiar para que el usuario sepa qué comandos tiene disponibles
+    (void)args;
+}
