@@ -49,12 +49,19 @@ void error_eafitos(const char *mensaje) {
 
 /**
  * @brief Limpia la pantalla de la terminal.
- *  Utiliza códigos de escape ANSI para limpiar la pantalla y posicionar el cursor en la esquina superior izquierda (0,0).
+ * Utiliza códigos de escape ANSI para limpiar la pantalla y posicionar el cursor en la esquina superior izquierda (0,0).
+ * Esto mejora la experiencia del usuario al proporcionar un entorno despejado.
+ *  
  */
 void limpiar_pantalla() {
-    // Código ANSI para limpiar pantalla y posicionar cursor en (0,0)
-    printf("\033[H\033[2J");
+    // \033[H  -> Mueve el cursor al inicio (Home)
+    // \033[2J -> Limpia la pantalla visible
+    // \033[3J -> Borra el historial de scroll (scrollback buffer)
+    printf("\033[H\033[2J\033[3J");
 }
+
+
+
 
 /**
  * @brief Muestra un banner de bienvenida con colores.
@@ -70,12 +77,12 @@ limpiar_pantalla();
     printf(CYN "  ____________________________________________________________\n");
     printf("  ||                                                        ||\n");
     // Fíjate cómo insertamos YEL antes de la parte final de cada línea
-    printf("  ||  " GRN "  ______          ______ _____ _______ " YEL "            " CYN "  ||\n");
-    printf("  ||  " GRN " |  ____|   /\\   |  ____|_   _|__   __|" YEL "            " CYN "  ||\n");
-    printf("  ||  " GRN " | |__     /  \\  | |__    | |    | |  " YEL "___  ___    " CYN "  ||\n");
-    printf("  ||  " GRN " |  __|   / /\\ \\ |  __|   | |    | | " YEL "/ _ \\/ __|   " CYN "  ||\n");
-    printf("  ||  " GRN " | |____ / ____ \\| |     _| |_   | |" YEL "| (_) \\__ \\   " CYN "  ||\n");
-    printf("  ||  " GRN " |______/_/    \\_\\_|    |_____|  |_|" YEL " \\___/|___/   " CYN "  ||\n");
+    printf("  ||  " GRN "  ______          ______ _____ _______ " YEL "            " CYN "   ||\n");
+    printf("  ||  " GRN " |  ____|   /\\   |  ____|_   _|__   __|" YEL "            " CYN "   ||\n");
+    printf("  ||  " GRN " | |__     /  \\  | |__    | |    | |  " YEL "___  ___    " CYN "    ||\n");
+    printf("  ||  " GRN " |  __|   / /\\ \\ |  __|   | |    | | " YEL "/ _ \\/ __|   " CYN "    ||\n");
+    printf("  ||  " GRN " | |____ / ____ \\| |     _| |_   | |" YEL "| (_) \\__ \\   " CYN "    ||\n");
+    printf("  ||  " GRN " |______/_/    \\_\\_|    |_____|  |_|" YEL " \\___/|___/   " CYN "    ||\n");
     printf("  ||                                                        ||\n");
     printf("  ____________________________________________________________\n" RESET);
 }

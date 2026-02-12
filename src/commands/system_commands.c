@@ -23,12 +23,13 @@
  *             args[2]: Operador (+, -, *, /)
  *             args[3]: Segundo operando (cadena)
  */
+
 void cmd_calc(char **args) {
     // 1. Validación de argumentos. Necesitamos exáctamente 3 partes después del comando.
     if (args[1] == NULL || args[2] == NULL || args[3] == NULL) {
        error_eafitos("Faltan parámetros para la operación.");  // Llamada a función de error personalizada
-       printf("  Uso: " YEL "calc <num1> <operador> <num2>" RESET "\n"); // Mensaje de ayuda específico para este comando
-       printf("  Ejemplo: calc 5 + 3\n");
+        printf("  Uso: " YEL "calc <num1> <operador> <num2>" RESET "\n"); // Mensaje de ayuda específico para este comando
+        printf("  Ejemplo: calc 5 + 3\n");
         return;
     }
 
