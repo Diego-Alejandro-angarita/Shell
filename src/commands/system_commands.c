@@ -12,6 +12,24 @@
 #include "commands.h"
 #include "utils.h" 
 
+
+/**
+ * @brief  Comando LIMPIAR
+ * 
+ * Limpia la pantalla de la terminal y muestra el banner de bienvenida.
+ * Esto mejora la experiencia del usuario al proporcionar un entorno despejado.
+ * @param args Argumentos del comando (no se usan aquí, por eso (void)args).
+ */
+void cmd_limpiar(char **args) {
+    limpiar_pantalla();    // Ahora con \033[3J para borrar el scroll
+      // Reaparece tu logo centrado
+    cmd_ayuda(args);       // Muestra el menú de comandos
+    
+}
+
+
+
+
 /**
  * @brief Comando CALC (Calculadora)
  * 
