@@ -12,6 +12,11 @@
 // --- Prototipos de Comandos ---
 
 /**
+ * @brief Cambia el idioma entre ingles y espanol.
+ */
+void cmd_idioma(char **args);
+
+/**
  * @brief Lista los archivos del directorio actual.
  */
 void cmd_listar(char **args);

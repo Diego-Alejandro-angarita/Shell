@@ -19,6 +19,8 @@
 #include "commands.h"
 #include "utils.h"
 
+Idioma idioma_actual = ESPANOL; // Valor por defecto
+
 /*
  * --- Registro de Comandos ---
  * Para evitar una larga cadena de 'if-else if-else', usamos dos arreglos paralelos:
@@ -29,6 +31,7 @@
  */
 
 char *nombres_comandos[] = {
+    "idioma",
     "listar",
     "leer",
     "limpiar",
@@ -48,6 +51,7 @@ char *nombres_comandos[] = {
  * y recibe como parámetro un arreglo de cadenas (char **)".
  */
 void (*func_comandos[]) (char **) = {
+    &cmd_idioma,
     &cmd_listar,
     &cmd_leer,
     &cmd_limpiar,
