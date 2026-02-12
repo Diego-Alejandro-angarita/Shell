@@ -22,6 +22,9 @@
  */
 #include "shell.h"
 
+//mejora previa a main.c para incluir utils.h y usar funciones de bienvenida y limpieza de pantalla
+#include "utils.h"   // Para mostrar_bienvenida() y colores
+
 /**
  * @brief Función principal del programa.
  * 
@@ -31,14 +34,34 @@
  *         terminó correctamente (EXIT_SUCCESS).
  */
 int main() {
-    // Imprime el mensaje de bienvenida a la salida estándar (stdout)
-    printf("Iniciando EAFITos v1.0...\n");
-    printf("Escribe 'ayuda' para comenzar.\n\n");
-    
-    // Llama al bucle principal de la shell ubicado en src/core/shell_loop.c.
-    // Esta función no retornará hasta que el usuario decida salir.
+
+/**
+ * @brief Construct a new mostrar bienvenida object
+ * Esta sección se encarga de mostrar un mensaje de bienvenida al usuario al iniciar la shell.
+ * Se implementan las siguientes mejoras para una experiencia de usuario más atractiva:
+ * 1. Limpieza de Pantalla: Antes de mostrar cualquier mensaje, se limpia la pantalla para ofrecer una interfaz limpia y profesional.
+ * 2. Mensaje de Bienvenida: Se muestra un banner de bienvenida estilizado utilizando colores ANSI para mejorar la experiencia del usuario.
+ * 3. Información Adicional: Se imprime un mensaje adicional indicando la versión de EAFITos y una sugerencia para comenzar a usar la shell.
+ */
+    mostrar_bienvenida(); // Definida en utils.h
+
+    printf(YEL "Iniciando EAFITos v1.0...\n" RESET);
+    printf("Escribe " GRN "'ayuda'" RESET " para comenzar.\n\n");
+
+
+/**
+ * @brief Construct a new loop shell object
+ * Después de mostrar la bienvenida, se llama a loop_shell(), que es el bucle principal de la shell.
+ * Este bucle se encarga de:
+ * 1. Mostrar el prompt "EAFITos>".
+ * 2. Leer la entrada del usuario.
+ * 3. Parsear la entrada en comandos y argumentos.
+ * 4. Ejecutar el comando correspondiente.
+ * 5. Repetir el proceso hasta que el usuario decida salir.
+ */
     loop_shell();
 
     // Retornamos 0 para indicar una finalización exitosa.
     return 0;
 }
+
