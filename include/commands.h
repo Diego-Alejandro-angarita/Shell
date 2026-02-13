@@ -12,6 +12,11 @@
 // --- Prototipos de Comandos ---
 
 /**
+ * @brief Cambia el idioma entre ingles y espanol.
+ */
+void cmd_idioma(char **args);
+
+/**
  * @brief Lista los archivos del directorio actual.
  */
 void cmd_listar(char **args);
@@ -41,6 +46,10 @@ void cmd_ayuda(char **args);
  */
 void cmd_salir(char **args);
 
+/**  
+ * @brief Comando para limpiar la terminal.
+ */
+void cmd_limpiar(char **args);
 // --- Utilidades del Registro de Comandos ---
 
 /**
@@ -48,5 +57,51 @@ void cmd_salir(char **args);
  * @return int Cantidad de comandos.
  */
 int num_comandos();
+
+
+
+// --- Comandos Avanzados ---
+
+/**
+ * @brief Crea un nuevo archivo con el nombre especificado.
+ * @param args Argumentos del comando, donde args[1] es el nombre del archivo a crear. 
+ * Ejemplo de uso: `crear nuevo_archivo.txt`
+ * Nota: Si el archivo ya existe, se mostrará un mensaje de error.
+ */
+void cmd_crear(char **args);
+
+
+/**
+ * @brief Elimina un archivo especificado por el usuario.
+ * @param args Argumentos del comando, donde args[1] es el nombre del archivo a eliminar. 
+ * Ejemplo de uso: `eliminar archivo_a_borrar.txt`
+ * Nota: Si el archivo no existe o no se puede eliminar, se mostrará un mensaje de error.
+ */
+void cmd_eliminar(char **args);
+
+/**
+ * @brief Renombra un archivo existente a un nuevo nombre.
+ * @param args Argumentos del comando, donde args[1] es el nombre actual del archivo y args[2] es el nuevo nombre. 
+ * Ejemplo de uso: `renombrar archivo_viejo.txt archivo_nuevo.txt`
+ * Nota: Si el archivo original no existe o el nuevo nombre ya está en uso, se mostrará un mensaje de error.
+ */
+void cmd_renombrar(char **args);
+
+/**
+ * @brief Copia un archivo de origen a un destino especificado por el usuario.
+ * @param args Argumentos del comando, donde args[1] es el nombre del archivo de origen y args[2] es el nombre del archivo de destino. 
+ * Ejemplo de uso: `copiar archivo_origen.txt archivo_destino.txt`
+ * Nota: Si el archivo de origen no existe o no se puede copiar, se mostrará un mensaje de error.
+ */
+void cmd_copiar(char **args);
+
+
+/**
+ * @brief Limpia la pantalla de la terminal y muestra el banner de bienvenida.
+ * Esto mejora la experiencia del usuario al proporcionar un entorno despejado.
+ * @param args Argumentos del comando (no se usan aquí, por eso (void)args).
+ */
+void cmd_limpiar(char **args);
+
 
 #endif

@@ -6,11 +6,13 @@
  * interactuando con las APIs del sistema de archivos.
  */
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <dirent.h> // Librería POSIX para manejo de directorios
 #include "commands.h"
+#include "utils.h" // Para funciones auxiliares como trim_whitespace
 
 /**
  * @brief Comando LISTAR (ls)
@@ -27,7 +29,8 @@ void cmd_listar(char **args) {
     d = opendir(".");
     
     if (d) {
-        printf("Archivos en el directorio actual:\n");
+        // printf(): Imprime un encabezado para la lista de archivos, usando colores para mejorar la legibilidad.
+        printf(CYN "\n--- Archivos en el directorio actual ---\n" RESET);
         // readdir(): Lee la siguiente entrada del directorio. Retorna NULL al final.
         while ((dir = readdir(d)) != NULL) {
             // Filtramos las entradas especiales "." (actual) y ".." (padre) para limpiar la salida
@@ -39,7 +42,8 @@ void cmd_listar(char **args) {
         closedir(d);
     } else {
         // perror(): Imprime un mensaje de error descriptivo basado en el valor global 'errno'
-        perror("Error al abrir directorio");
+        error_eafitos("No se pudo acceder al directorio actual.");
+
     }
     (void)args;
 }
@@ -55,7 +59,8 @@ void cmd_listar(char **args) {
 void cmd_leer(char **args) {
     // Validación básica: ¿El usuario pasó el nombre del archivo?
     if (args[1] == NULL) {
-        printf("Error: Debes especificar un archivo para leer.\nUso: leer <nombre_archivo>\n");
+        error_eafitos("Falta el nombre del archivo.");
+        printf("  Uso: " YEL "leer <nombre_archivo>" RESET "\n");
         return;
     }
 
@@ -63,9 +68,17 @@ void cmd_leer(char **args) {
     // Retorna un puntero a FILE o NULL si falla (ej. archivo no existe).
     FILE *fp = fopen(args[1], "r");
     if (fp == NULL) {
-        printf("Error: No se pudo abrir el archivo '%s'. Verifique que exista.\n", args[1]);
+        // Construimos un mensaje de error específico para el archivo que no se pudo abrir.
+        char msg[128];
+        snprintf(msg, sizeof(msg), "No se pudo abrir el archivo '%s'.", args[1]);
+        error_eafitos(msg);
+        
         return;
     }
+
+    // Título estético antes de mostrar contenido
+    printf(YEL "[ Contenido de: %s ]\n" RESET, args[1]);
+    printf("------------------------------------------\n");
 
     char ch;
     // fgetc(): Lee el siguiente caracter del flujo.
@@ -74,7 +87,7 @@ void cmd_leer(char **args) {
         // putchar(): Escribe un caracter en la salida estándar (consola).
         putchar(ch);
     }
-    printf("\n"); // Salto de línea estético al final
+    printf("\n------------------------------------------\n\n"); // Salto de línea estético al final
 
     // fclose(): Es crítico cerrar los archivos para evitar fugas de recursos.
     fclose(fp);

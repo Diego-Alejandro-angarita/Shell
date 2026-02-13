@@ -15,6 +15,12 @@
 // Caracteres que separan los argumentos de un comando (espacio, tab, etc.)
 #define DELIM " \t\r\n\a"
 
+// Definimos los idiomas disponibles
+typedef enum { ESPANOL, INGLES } Idioma;
+
+// Variable global para el idioma actual (la definiremos en shell_loop.c)
+extern Idioma idioma_actual;
+
 /**
  * @brief Inicia el bucle principal de la shell.
  * No retorna hasta que el comando 'salir' sea invocado.
