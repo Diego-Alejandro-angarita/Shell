@@ -53,12 +53,14 @@ void cmd_ayuda(char **args) {
         printf("  - " GRN "eliminar" RESET " " YEL "<file>" RESET " : Delete a file with confirmation.\n");
         printf("  - " GRN "renombrar" RESET " " YEL "<old> <new>" RESET " : Change a file's name.\n");
         printf("  - " GRN "copiar" RESET " " YEL "<src> <dst>" RESET " : Copy content from one file to another.\n");
-        printf("  - " GRN "idioma" RESET " " YEL "<1/2>" RESET " : Change language (1: ES, 2: EN).\n");
+        printf("  - " GRN "idioma" RESET " " YEL "<2/2>" RESET " : Change language (1: ES, 2: EN).\n");
         printf("  - " GRN "salir" RESET " : Terminate the session.\n");
     }
     
     (void)args;
 }
+
+
 
 /**
  * @brief Comando SALIR

@@ -35,6 +35,9 @@
  */
 int main() {
 
+    // Desactiva el buffering de stdout para todo el programa
+    setbuf(stdout, NULL); 
+
 /**
  * @brief Construct a new mostrar bienvenida object
  * Esta sección se encarga de mostrar un mensaje de bienvenida al usuario al iniciar la shell.

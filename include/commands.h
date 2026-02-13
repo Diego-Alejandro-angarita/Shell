@@ -46,6 +46,10 @@ void cmd_ayuda(char **args);
  */
 void cmd_salir(char **args);
 
+/**  
+ * @brief Comando para limpiar la terminal.
+ */
+void cmd_limpiar(char **args);
 // --- Utilidades del Registro de Comandos ---
 
 /**
@@ -90,5 +94,14 @@ void cmd_renombrar(char **args);
  * Nota: Si el archivo de origen no existe o no se puede copiar, se mostrará un mensaje de error.
  */
 void cmd_copiar(char **args);
+
+
+/**
+ * @brief Limpia la pantalla de la terminal y muestra el banner de bienvenida.
+ * Esto mejora la experiencia del usuario al proporcionar un entorno despejado.
+ * @param args Argumentos del comando (no se usan aquí, por eso (void)args).
+ */
+void cmd_limpiar(char **args);
+
 
 #endif

@@ -19,6 +19,7 @@ extern int idioma_actual;
  * * Realiza operaciones aritméticas básicas entre dos números.
  * Sintaxis esperada: calc <num1> <operador> <num2>
  */
+
 void cmd_calc(char **args) {
     // 1. Validación de argumentos. Necesitamos exactamente 3 partes después del comando.
     if (args[1] == NULL || args[2] == NULL || args[3] == NULL) {
@@ -109,4 +110,10 @@ void cmd_idioma(char **args) {
         if (idioma_actual == 1) error_eafitos("Opción no válida. Use 1 o 2.");
         else error_eafitos("Invalid option. Use 1 or 2.");
     }
+}
+
+void cmd_limpiar(char **args) {
+    limpiar_pantalla();
+    cmd_ayuda(args); // Mostrar ayuda después de limpiar para que el usuario sepa qué comandos tiene disponibles
+    (void)args;
 }
