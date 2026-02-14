@@ -1,41 +1,43 @@
 /**
  * @file system_commands.c
  * @brief Comandos de utilería del sistema.
- * 
- * Actualmente contiene la calculadora, pero podría expandirse para incluir
- * gestión de procesos o informes de memoria.
+ * * Actualmente contiene la calculadora y el sistema de internacionalización (idiomas).
  */
 
-
 #include <stdio.h>
-#include <stdlib.h> // Para atof (ASCII to Float conversion)
+#include <stdlib.h> // Para atof (ASCII to Float conversion) y atoi
 #include "commands.h"
 #include "utils.h" 
 
+/* * Referencia externa a la variable global definida en shell_loop.c 
+ * Esto permite que este archivo sepa en qué idioma estamos.
+ */
+extern int idioma_actual; 
+
 /**
  * @brief Comando CALC (Calculadora)
- * 
- * Realiza operaciones aritméticas básicas entre dos números.
+ * * Realiza operaciones aritméticas básicas entre dos números.
  * Sintaxis esperada: calc <num1> <operador> <num2>
- * 
- * @param args Lista de argumentos donde:
- *             args[1]: Primer operando (cadena)
- *             args[2]: Operador (+, -, *, /)
- *             args[3]: Segundo operando (cadena)
  */
+
 void cmd_calc(char **args) {
-    // 1. Validación de argumentos. Necesitamos exáctamente 3 partes después del comando.
+    // 1. Validación de argumentos. Necesitamos exactamente 3 partes después del comando.
     if (args[1] == NULL || args[2] == NULL || args[3] == NULL) {
-       error_eafitos("Faltan parámetros para la operación.");  // Llamada a función de error personalizada
-       printf("  Uso: " YEL "calc <num1> <operador> <num2>" RESET "\n"); // Mensaje de ayuda específico para este comando
-       printf("  Ejemplo: calc 5 + 3\n");
-        return;
+       if (idioma_actual == 1) { // Español
+           error_eafitos("Faltan parámetros para la operación.");
+           printf("  Uso: " YEL "calc <num1> <operador> <num2>" RESET "\n");
+           printf("  Ejemplo: calc 5 + 3\n");
+       } else { // Inglés
+           error_eafitos("Missing parameters for the operation.");
+           printf("  Usage: " YEL "calc <num1> <operator> <num2>" RESET "\n");
+           printf("  Example: calc 5 + 3\n");
+       }
+       return;
     }
 
     // 2. Conversión de tipos (Parsing)
-    // atof(): Convierte una cadena numérica a un float (double precision).
     float n1 = atof(args[1]);
-    char op = args[2][0]; // Tomamos el primer caracter del argumento operador
+    char op = args[2][0]; 
     float n2 = atof(args[3]);
     float res = 0;
 
@@ -48,33 +50,70 @@ void cmd_calc(char **args) {
             res = n1 - n2; 
             break;
         case '*': 
-        case 'x': // Permitimos 'x' como alias de multiplicación
+        case 'x': 
             res = n1 * n2; 
             break;
         case '/': 
-            // Manejo de caso borde: División por cero
             if (n2 == 0) {
-                error_eafitos("Operación inválida: División por cero.");
+                if (idioma_actual == 1) error_eafitos("Operación inválida: División por cero.");
+                else error_eafitos("Invalid operation: Division by zero.");
                 return;
             }
             res = n1 / n2; 
             break;
         default: 
-
-        /**
-         * @brief  Manejo de operador desconocido
-         *  Si el usuario ingresa un operador que no reconocemos, mostramos un error específico.
-         *   sprintf() se utiliza para construir un mensaje de error dinámico que incluye el operador no reconocido.
-         *   Esto mejora la experiencia del usuario al proporcionar información clara sobre lo que salió mal.
-         *  msg es un buffer de 50 caracteres, lo suficientemente grande para contener el mensaje de error.
-         */
-            char msg[50]; 
-            sprintf(msg, "Operador '%c' no reconocido.", op); 
-            error_eafitos(msg);
-            return;
+            {
+                char msg[50]; 
+                if (idioma_actual == 1) sprintf(msg, "Operador '%c' no reconocido.", op);
+                else sprintf(msg, "Operator '%c' not recognized.", op);
+                error_eafitos(msg);
+                return;
+            }
     }
 
     // 4. Salida
-    // %.2f formatea el float para mostrar solo 2 decimales.
-    printf(GRN "➜  Resultado: " RESET "%.2f\n", res);
+    if (idioma_actual == 1) printf(GRN "➜  Resultado: " RESET "%.2f\n", res);
+    else printf(GRN "➜  Result: " RESET "%.2f\n", res);
+}
+
+/**
+ * @brief Comando IDIOMA
+ * * Permite al usuario cambiar el idioma global de la shell EAFITos.
+ * Opciones: 1 para Español, 2 para Inglés.
+ */
+void cmd_idioma(char **args) {
+    // Si el usuario no pone argumentos (ej: solo escribe 'idioma')
+    if (args[1] == NULL) {
+        if (idioma_actual == 1) {
+            error_eafitos("Debe especificar un idioma.");
+            printf("  Uso: " YEL "idioma <1 o 2>" RESET "\n");
+            printf("  1: Español | 2: Inglés\n");
+        } else {
+            error_eafitos("You must specify a language.");
+            printf("  Usage: " YEL "idioma <1 or 2>" RESET "\n");
+            printf("  1: Spanish | 2: English\n");
+        }
+        return;
+    }
+
+    int seleccion = atoi(args[1]);
+
+    if (seleccion == 1) {
+        idioma_actual = 1; // ESPAÑOL
+        printf(GRN "➜  Idioma configurado en: " RESET "Español\n");
+        cmd_ayuda(args);
+    } else if (seleccion == 2) {
+        idioma_actual = 2; // INGLES
+        printf(GRN "➜  Language set to: " RESET "English\n");
+        cmd_ayuda(args);
+    } else {
+        if (idioma_actual == 1) error_eafitos("Opción no válida. Use 1 o 2.");
+        else error_eafitos("Invalid option. Use 1 or 2.");
+    }
+}
+
+void cmd_limpiar(char **args) {
+    limpiar_pantalla();
+    cmd_ayuda(args); // Mostrar ayuda después de limpiar para que el usuario sepa qué comandos tiene disponibles
+    (void)args;
 }
