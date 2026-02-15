@@ -16,7 +16,12 @@
 #define DELIM " \t\r\n\a"
 
 // Definimos los idiomas disponibles
-typedef enum { ESPANOL, INGLES } Idioma;
+typedef enum { 
+    ESPANOL = 1, 
+    INGLES = 2 
+} Idioma;
+
+extern Idioma idioma_actual;
 
 // Variable global para el idioma actual (la definiremos en shell_loop.c)
 extern Idioma idioma_actual;
