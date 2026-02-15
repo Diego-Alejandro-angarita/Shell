@@ -7,12 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h> // Para atof (ASCII to Float conversion) y atoi
 #include "commands.h"
-#include "utils.h" 
-
-/* * Referencia externa a la variable global definida en shell_loop.c 
- * Esto permite que este archivo sepa en qué idioma estamos.
- */
-extern int idioma_actual; 
+#include "utils.h"
+#include "shell.h" // Para acceder al idioma_actual
 
 /**
  * @brief Comando CALC (Calculadora)

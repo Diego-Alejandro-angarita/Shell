@@ -88,3 +88,36 @@ clean:
 run: all
 	@echo "🚀 Ejecutando EAFITos..."
 	./$(TARGET)
+
+
+# ... (Contenido existente del Makefile) ...
+
+# ==============================================================================
+# Testing
+# ==============================================================================
+
+# Filtramos main.o para las pruebas unitarias (porque el test tiene su propio main)
+OBJS_NO_MAIN = $(filter-out $(BUILD_DIR)/core/main.o, $(OBJS))
+
+# Objetivos de pruebas
+TEST_SRC = tests/unit_tests.c
+TEST_BIN = $(BUILD_DIR)/unit_test_runner
+
+# Regla para compilar el runner de pruebas unitarias
+$(TEST_BIN): $(TEST_SRC) $(OBJS_NO_MAIN)
+	@echo "Compilando pruebas unitarias..."
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -o $@ $^
+
+# Ejecutar pruebas unitarias
+test_unit: $(TEST_BIN)
+	@echo "Ejecutando Pruebas Unitarias..."
+	@./$(TEST_BIN)
+
+# Ejecutar pruebas de integración
+test_integration: $(TARGET)
+	@echo "Ejecutando Pruebas de Integración..."
+	@./tests/integration_tests.sh
+
+# Ejecutar todas las pruebas
+test: test_unit test_integration

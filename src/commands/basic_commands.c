@@ -8,12 +8,7 @@
 #include <time.h>   // time, localtime, strftime
 #include "commands.h"
 #include "utils.h"  // Para funciones de utilidad como error_eafitos
-
-/* * Referencia externa al idioma global definido en shell_loop.c 
- * 1: Español, 2: Inglés 
- */
-extern int idioma_actual;
-
+#include "shell.h"  // Para acceder al idioma_actual
 /**
  * @brief Comando AYUDA
  * * Muestra al usuario la lista de acciones que puede realizar.

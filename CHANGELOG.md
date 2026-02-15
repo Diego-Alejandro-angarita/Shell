@@ -8,6 +8,5 @@ El objetivo de este archivo es llevar un registro cronológico de las versiones,
 - **Comandos Básicos**: `listar`, `leer`, `tiempo`, `calc`, `ayuda`, `salir`.
 - **Arquitectura Modular**: Separación en `core`, `commands`, `utils`.
 - **Sistema de Documentación**: Soporte para Doxygen.
-
 ### Cambios
 - Migración de `main.c` monolítico a estructura modular.
