@@ -9,4 +9,4 @@
 
 
 ### Diagrama del Bucle REPL
-![Imagen del diagrama](docs/images/bucle_repl.png)
+![Imagen del diagrama](docs/images/Diagrama_REPL.png)
