@@ -1,9 +1,11 @@
 /**
  * @file file_commands.c
  * @brief Comandos para manipulación y visualización de archivos.
- * 
- * Implementa funcionalidades similares a 'ls' (listar) y 'cat' (leer) de Unix,
- * interactuando con las APIs del sistema de archivos.
+ *
+ * @details
+ * Implementa funcionalidades similares a los comandos
+ * Unix 'ls' y 'cat', utilizando la API POSIX
+ * para interacción con el sistema de archivos.
  */
 
 
@@ -43,7 +45,7 @@ void cmd_listar(char **args) {
     } else {
         // perror(): Imprime un mensaje de error descriptivo basado en el valor global 'errno'
         error_eafitos("No se pudo acceder al directorio actual.");
-
+        perror("Detalle");
     }
     (void)args;
 }

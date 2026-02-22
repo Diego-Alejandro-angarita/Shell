@@ -10,4 +10,4 @@ El objetivo de este archivo es llevar un registro cronológico de las versiones,
 - **Sistema de Documentación**: Soporte para Doxygen.
 
 ### Cambios
-- Migración de `main.c` monolítico a estructura modular.
+-  Migración de `main.c` monolítico a estructura modular.

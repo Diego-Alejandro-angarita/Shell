@@ -48,7 +48,7 @@ void enable_raw_mode() {
 void agregar_al_historial(const char *cmd) {
     // No guardar líneas vacías o duplicados consecutivos
     if (cmd == NULL || strlen(cmd) == 0) return;
-    if (historial_count > 0 && strcmp(historial[historial_count - 1], cmd) == 0) return;
+    if (historial_count > 0 && strcmp(historial[historial_count - 1], cmd) == 0) return; // Evitar duplicados consecutivos
 
     if (historial_count < HISTORY_MAX) {
         strncpy(historial[historial_count], cmd, CMD_MAX_LEN);
@@ -152,7 +152,16 @@ char *leer_linea(void) {
     return buffer;
 }
 
-// ... (Mantén aquí la función parsear_linea original sin cambios) ...
+/**
+ * @brief Divide la línea de entrada en tokens.
+ *
+ * @details
+ * Utiliza strtok() con los delimitadores definidos en DELIM
+ * (espacios, tabulaciones, saltos de línea).
+ *
+ * @param linea Cadena de entrada cruda.
+ * @return char** Arreglo dinámico de tokens terminado en NULL.
+ */
 char **parsear_linea(char *linea) {
     int bufsize = 64;
     int posicion = 0;
@@ -164,14 +173,14 @@ char **parsear_linea(char *linea) {
         exit(EXIT_FAILURE);
     }
 
-    token = strtok(linea, DELIM);
+    token = strtok(linea, DELIM); // DELIM se define en shell.h como " \t\r\n\a"
     while (token != NULL) {
-        tokens[posicion] = token;
+        tokens[posicion] = token; // Guardamos el token actual en el array de tokens
         posicion++;
 
         if (posicion >= bufsize) {
-            bufsize += 64;
-            tokens = realloc(tokens, bufsize * sizeof(char*));
+            bufsize += 64; // Aumentamos el tamaño del buffer si es necesario
+            tokens = realloc(tokens, bufsize * sizeof(char*)); // Reasignamos memoria para el array de tokens
             if (!tokens) {
                 fprintf(stderr, "Error de reasignación de memoria\n");
                 exit(EXIT_FAILURE);
