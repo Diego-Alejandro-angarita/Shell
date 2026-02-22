@@ -31,8 +31,14 @@ Internamente en C, esto se maneja mediante un arreglo de cadenas (`char **args`)
 | `listar` | Ninguno | Muestra los archivos del directorio actual. | `listar` |
 | `leer` | `<archivo>` | Muestra el contenido de un archivo de texto. | `leer README.md` |
 | `tiempo` | Ninguno | Muestra la fecha y hora actual del sistema. | `tiempo` |
+| `limpiar` | Ninguno | Limpia la pantalla de la terminal. |
 | `calc` | `<n1> <op> <n2>` | Realiza operaciones aritméticas (+, -, *, /). | `calc 10 * 2.5` |
 | `ayuda` | Ninguno | Muestra la lista de comandos disponibles. | `ayuda` |
+| `crear` | `<nombre>` | Crea un nuevo archivo vacío con el nombre especificado. |
+| `eliminar` | `<archivo>` | Borra un archivo. `Nota`: Requiere confirmación manual (`s/n`) antes de proceder. |
+| `renombrar`| `<viejo> <nuevo>` | Cambia el nombre de un archivo o lo mueve de ubicación. |
+| `copiar` | `<origen> <destino>` | Crea una copia exacta del archivo origen en la ruta de destino. |
+| `idioma` | `<1/2>` | Cambia el idioma del sistema (1: Español, 2: Inglés). |
 | `salir` | Ninguno | Termina la sesión de EAFITos. | `salir` |
 
 ## 🛠️ Estructura del Proyecto

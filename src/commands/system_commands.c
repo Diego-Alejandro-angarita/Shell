@@ -7,32 +7,37 @@
 #include <stdio.h>
 #include <stdlib.h> // Para atof (ASCII to Float conversion) y atoi
 #include "commands.h"
-#include "utils.h" 
-
-/* * Referencia externa a la variable global definida en shell_loop.c 
- * Esto permite que este archivo sepa en qué idioma estamos.
- */
-extern int idioma_actual; 
+#include "utils.h"
+#include "shell.h" // Para acceder al idioma_actual
 
 /**
  * @brief Comando CALC (Calculadora)
- * * Realiza operaciones aritméticas básicas entre dos números.
- * Sintaxis esperada: calc <num1> <operador> <num2>
+ * @brief Ejecuta operaciones aritméticas básicas.
+ *
+ * @details
+ * Soporta suma (+), resta (-), multiplicación (* o x)
+ * y división (/). Realiza validación de argumentos
+ * y manejo de errores (incluyendo división por cero).
+ *
+ * @param args Arreglo de argumentos:
+ *  - args[1]: primer número
+ *  - args[2]: operador
+ *  - args[3]: segundo número
  */
 
 void cmd_calc(char **args) {
     // 1. Validación de argumentos. Necesitamos exactamente 3 partes después del comando.
     if (args[1] == NULL || args[2] == NULL || args[3] == NULL) {
        if (idioma_actual == 1) { // Español
-           error_eafitos("Faltan parámetros para la operación.");
-           printf("  Uso: " YEL "calc <num1> <operador> <num2>" RESET "\n");
-           printf("  Ejemplo: calc 5 + 3\n");
+        error_eafitos("Faltan parámetros para la operación.");
+        printf("  Uso: " YEL "calc <num1> <operador> <num2>" RESET "\n");
+        printf("  Ejemplo: calc 5 + 3\n");
        } else { // Inglés
-           error_eafitos("Missing parameters for the operation.");
-           printf("  Usage: " YEL "calc <num1> <operator> <num2>" RESET "\n");
-           printf("  Example: calc 5 + 3\n");
-       }
-       return;
+        error_eafitos("Missing parameters for the operation.");
+        printf("  Usage: " YEL "calc <num1> <operator> <num2>" RESET "\n");
+        printf("  Example: calc 5 + 3\n");
+        }
+    return;
     }
 
     // 2. Conversión de tipos (Parsing)
@@ -41,7 +46,8 @@ void cmd_calc(char **args) {
     float n2 = atof(args[3]);
     float res = 0;
 
-    // 3. Lógica de selección (Switch)
+// Evaluamos el operador y realizamos la operación correspondiente
+// Soporta: +, -, *, x y /
     switch(op) {
         case '+': 
             res = n1 + n2; 
@@ -96,7 +102,7 @@ void cmd_idioma(char **args) {
         return;
     }
 
-    int seleccion = atoi(args[1]);
+    int seleccion = atoi(args[1]); // Convertimos el argumento a entero para comparar
 
     if (seleccion == 1) {
         idioma_actual = 1; // ESPAÑOL
@@ -112,6 +118,11 @@ void cmd_idioma(char **args) {
     }
 }
 
+/**
+ * @brief  Comando LIMPIAR
+ *  Limpia la pantalla de la terminal y muestra el panel de ayuda para que el usuario sepa qué comandos tiene disponibles.
+ * @param args  Argumentos del comando (no se usan aquí).
+ */
 void cmd_limpiar(char **args) {
     limpiar_pantalla();
     cmd_ayuda(args); // Mostrar ayuda después de limpiar para que el usuario sepa qué comandos tiene disponibles
