@@ -6,3 +6,7 @@
 1. **Ciclo de Vida de la Shell**: Diagrama del bucle REPL.
 2. **Gestión de Memoria**: Cómo se planea manejar la asignación de recursos.
 3. **Modularidad**: Explicación de la división `core` vs `commands`.
+
+
+### Diagrama del Bucle REPL
+![Imagen del diagrama](/images/Diagrama REPL.png)
