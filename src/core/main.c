@@ -26,42 +26,27 @@
 #include "utils.h"   // Para mostrar_bienvenida() y colores
 
 /**
- * @brief Función principal del programa.
- * 
- * En C, la ejecución siempre comienza en la función main.
- * 
- * @return int Retorna 0 al sistema operativo para indicar que el programa
- *         terminó correctamente (EXIT_SUCCESS).
+ * @brief Punto de inicio del sistema EAFITos.
+ *
+ * @details
+ * Inicializa el entorno de ejecución,
+ * muestra el banner de bienvenida y
+ * transfiere el control al bucle principal (REPL).
+ *
+ * @return int EXIT_SUCCESS si finaliza correctamente.
  */
-int main() {
+int main(void) {
 
     // Desactiva el buffering de stdout para todo el programa
     setbuf(stdout, NULL); 
 
-/**
- * @brief Construct a new mostrar bienvenida object
- * Esta sección se encarga de mostrar un mensaje de bienvenida al usuario al iniciar la shell.
- * Se implementan las siguientes mejoras para una experiencia de usuario más atractiva:
- * 1. Limpieza de Pantalla: Antes de mostrar cualquier mensaje, se limpia la pantalla para ofrecer una interfaz limpia y profesional.
- * 2. Mensaje de Bienvenida: Se muestra un banner de bienvenida estilizado utilizando colores ANSI para mejorar la experiencia del usuario.
- * 3. Información Adicional: Se imprime un mensaje adicional indicando la versión de EAFITos y una sugerencia para comenzar a usar la shell.
- */
-    mostrar_bienvenida(); // Definida en utils.h
+// Mostrar banner de bienvenida y mensaje inicial
+mostrar_bienvenida();
 
-    printf(YEL "Iniciando EAFITos v1.0...\n" RESET);
-    printf("Escribe " GRN "'ayuda'" RESET " para comenzar.\n\n");
+printf(YEL "Iniciando EAFITos v1.0...\n" RESET);
+printf("Escribe " GRN "'ayuda'" RESET " para comenzar.\n\n");
 
-
-/**
- * @brief Construct a new loop shell object
- * Después de mostrar la bienvenida, se llama a loop_shell(), que es el bucle principal de la shell.
- * Este bucle se encarga de:
- * 1. Mostrar el prompt "EAFITos>".
- * 2. Leer la entrada del usuario.
- * 3. Parsear la entrada en comandos y argumentos.
- * 4. Ejecutar el comando correspondiente.
- * 5. Repetir el proceso hasta que el usuario decida salir.
- */
+// Transferir control al bucle principal REPL
     loop_shell();
 
     // Retornamos 0 para indicar una finalización exitosa.

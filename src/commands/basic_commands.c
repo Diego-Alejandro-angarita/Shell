@@ -25,6 +25,7 @@ void cmd_ayuda(char **args) {
         printf("  - " GRN "listar" RESET " Muestra archivos del directorio.\n");
         printf("  - " GRN "leer" RESET " " YEL "<archivo>" RESET " : Muestra el contenido de un archivo.\n");
         printf("  - " GRN "tiempo" RESET " : Muestra la fecha y hora actual.\n");
+        printf("  - " GRN "limpiar" RESET " : Limpia la pantalla de la terminal.\n");
         printf("  - " GRN "calc" RESET "" YEL " <n1> <op> <n2>" RESET " : Realiza cálculos simples.\n");
         printf("  - " GRN "ayuda" RESET " : Muestra este mensaje.\n");
         printf("  - " GRN "crear" RESET " " YEL "<archivo>" RESET " : Crea un archivo vacío.\n");
@@ -42,6 +43,7 @@ void cmd_ayuda(char **args) {
         printf("  - " GRN "listar" RESET " List files in the current directory.\n");
         printf("  - " GRN "leer" RESET " " YEL "<file>" RESET " : Display the content of a file.\n");
         printf("  - " GRN "tiempo" RESET " : Show the current date and time.\n");
+        printf("  - " GRN "limpiar" RESET " : Clear the terminal screen.\n");
         printf("  - " GRN "calc" RESET "" YEL " <n1> <op> <n2>" RESET " : Perform simple calculations.\n");
         printf("  - " GRN "ayuda" RESET " : Display this help message.\n");
         printf("  - " GRN "crear" RESET " " YEL "<file>" RESET " : Create an empty file.\n");
@@ -81,15 +83,13 @@ void cmd_tiempo(char **args) {
     
     if (idioma_actual == 1) {
         printf(GRN " Fecha y Hora: " RESET "%02d-%02d-%04d %02d:%02d:%02d\n",
-               tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900,
-               tm.tm_hour, tm.tm_min, tm.tm_sec); 
+                tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900,
+                tm.tm_hour, tm.tm_min, tm.tm_sec); 
     } else {
         printf(GRN " Date and Time: " RESET "%04d/%02d/%02d %02d:%02d:%02d\n",
-               tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,
-               tm.tm_hour, tm.tm_min, tm.tm_sec); 
-    }
-           
+                tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,
+                tm.tm_hour, tm.tm_min, tm.tm_sec); 
+    }           
     (void)args;
 }
 
-//Actualizacion repositorio

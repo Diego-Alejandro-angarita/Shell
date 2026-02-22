@@ -1,18 +1,17 @@
 /**
- * @file error_handler.c    
-* @brief Manejo de errores en la shell.
-* Este módulo proporciona funciones para manejar errores de manera consistente en toda la shell.
-* Incluye la función error_eafitos() que imprime mensajes de error formateados en rojo para destacar que se trata de un error.
-* También se incluyen funciones para limpiar la pantalla y
+ * @file error_handler.c
+ * @brief Manejo de errores en la shell y utilidades visuales.
+ *
+  * @details
+ * Este archivo centraliza el manejo de errores y funciones
+ * visuales de la shell EAFITos.
+ *
+ * Proporciona:
+ * - Impresión de errores en stderr con formato ANSI.
+ * - Limpieza de pantalla.
+ * - Banner de bienvenida estilizado.
  */
 
-
-/*
- * --- cabezeras propias ---
- * "utils.h": Incluye los prototipos de las funciones de utilidad, como error_eafitos(), limpiar_pantalla() y mostrar_bienvenida().
- * Esto permite que este archivo conozca la existencia de estas funciones y pueda usarlas o implementarlas.
- */
-#include "utils.h"
 
 /* 
  * --- Librerías Estándar ---

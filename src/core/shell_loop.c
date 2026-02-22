@@ -1,13 +1,20 @@
 /**
  * @file shell_loop.c
- * @brief Corazón operativo de la shell (Lógica de control).
+ * @brief Implementación del bucle principal y despacho de comandos.
  *
- * Contiene el bucle principal (Read-Eval-Print Loop) y la lógica para
- * despachar (dispatch) la ejecución de comandos utilizando una tabla de búsqueda.
+ * @details
+ * Este módulo implementa el REPL (Read-Eval-Print Loop)
+ * de la shell EAFITos.
+ *
+ * Funcionalidades principales:
+ * - Registro dinámico de comandos.
+ * - Búsqueda mediante tabla de punteros a función.
+ * - Ejecución y manejo de errores.
  */
 
 /**
- * @file utils.h
+ * --- Librerías Estándar ---
+ * <stdio.h>: Standard Input/Output.
  * @brief Utilidades generales para la shell EAFITos. 
  * Contiene funciones de manejo de errores, limpieza de pantalla y presentación.
 * Estas funciones son auxiliares para mejorar la experiencia del usuario y la interfaz de la shell.
@@ -19,6 +26,11 @@
 #include "commands.h"
 #include "utils.h"
 
+
+/**
+ * @brief Idioma activo de la shell.
+ * @details Se inicializa en ESPANOL por defecto.
+ */
 Idioma idioma_actual = ESPANOL; // Valor por defecto
 
 /*
@@ -30,6 +42,9 @@ Idioma idioma_actual = ESPANOL; // Valor por defecto
  * Esto facilita la extensibilidad: para añadir un comando, solo se agregan entradas aquí.
  */
 
+/**
+ * @brief Lista de nombres de comandos soportados por la shell.
+ */
 char *nombres_comandos[] = {
     "idioma",
     "listar",
@@ -49,6 +64,12 @@ char *nombres_comandos[] = {
  * Puntero a función: void (*func)(char **)
  * Significa: "La dirección de una función que no retorna nada (void)
  * y recibe como parámetro un arreglo de cadenas (char **)".
+ */
+
+/**
+ * @brief Tabla paralela de punteros a funciones asociadas a cada comando.
+ *
+ * Cada índice corresponde al mismo índice en nombres_comandos[].
  */
 void (*func_comandos[]) (char **) = {
     &cmd_idioma,
@@ -98,7 +119,6 @@ void ejecutar(char **args) {
 
     /**
      * @brief  
-     * Si llegamos aquí, el comando no fue reconocido. Construimos un mensaje de error personalizado.
      *  Usamos snprintf para evitar desbordamientos de buffer, limitando el tamaño del mensaje a 128 caracteres.
      *  Luego, llamamos a error_eafitos() para imprimir el mensaje en rojo
      */
@@ -135,7 +155,7 @@ void loop_shell() {
         // 2. Parseo
         args = parsear_linea(linea);
         
-        // 3. Ejecución
+
         ejecutar(args);
         
         // 4. Limpieza de memoria (Gestión manual requerida en C)
