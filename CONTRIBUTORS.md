@@ -6,15 +6,15 @@ Este archivo tiene como objetivo reconocer a todas las personas que han contribu
 
 ## Mantenedores Principales
 
-* **Esteban Alvarez Garcia**
+* **ESTEBAN ALVAREZ GARCIA:**
 - Diseño de la interfaz en terminal. 
 - Documentación técnica con Doxygen.
 
-* **Diego Angarita Arboleda** 
+* **DIEGO ANGARITA ARBOLEDA:** 
 - Validación y manejo de errores.
 - Pruebas y control de calidad.
 
-* **Yan Frank Rios Lopez**
+* **YAN FRANK RÍOS LÓPEZ:**
 
 * **Motor del Núcleo (Core Engine):**
 Optimización del bucle **principal REPL** (Read-Eval-Print Loop) para una ejecución sin latencia.
