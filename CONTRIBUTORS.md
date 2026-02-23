@@ -6,13 +6,19 @@ Este archivo tiene como objetivo reconocer a todas las personas que han contribu
 
 ## Mantenedores Principales
 
+
+
 * **ESTEBAN ALVAREZ GARCIA:**
 - Diseño de la interfaz en terminal. 
 - Documentación técnica con Doxygen.
 
+
+
 * **DIEGO ANGARITA ARBOLEDA:** 
 - Validación y manejo de errores.
 - Pruebas y control de calidad.
+
+
 
 * **YAN FRANK RÍOS LÓPEZ:**
 
